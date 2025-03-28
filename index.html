@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Cumpleaños Mi Amor</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+    <title>Feliz Cumpleaños Mi Reina</title>
+    <!-- Importar Geist desde CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.1/css/all.min.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #ff6b9e;
@@ -12,25 +13,32 @@
             --accent-color: #ff2d75;
             --text-light: #ffffff;
             --text-dark: #333333;
+            --bg-color: #f8f8f8;
         }
         
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Geist Sans', sans-serif;
             overflow-x: hidden;
-            color: var(--text-light);
+            color: var(--text-dark);
             text-align: center;
-            background-color: #f8f8f8;
+            background-color: var(--bg-color);
         }
         
-        /* Mosaico de fondo mejorado */
+        .text-dark{
+            color: var(--text-dark);
+        }
+        .text-light{
+            color: var(--text-light);
+        }
+        /* MOSAICO CON NUEVOS AJUSTES */
         #mosaic-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
-            height: 100vh;
+            height: 100vh; /* 100% del viewport height */
             overflow: hidden;
             z-index: -1;
         }
@@ -41,86 +49,92 @@
             left: 50%;
             transform: translate(-50%, -50%);
             display: grid;
-            grid-template-columns: repeat(auto-fill, 60px);
-            grid-auto-rows: 60px;
-            gap: 6px;
-            min-width: 100%;
-            min-height: 100%;
-            opacity: 0.5; /* Más visible */
-            filter: brightness(0.9) contrast(1.1) sepia(10%) saturate(1.2); /* Más definidas */
+            grid-template-columns: repeat(auto-fill, 50px); /* Imágenes de 50px */
+            grid-auto-rows: 50px;
+            gap: 5px;
+            width: 100%;
+            height: 100%; /* Ocupa el 100% del contenedor */
+            opacity: 0.3; /* Opacidad reducida a 0.3 */
         }
         
         .tile {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background-size: cover;
             background-position: center;
-            border-radius: 8px;
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
+            border: none; /* Quitamos el borde */
+            box-shadow: none; /* Quitamos la sombra */
         }
         
-        .tile:hover {
-            transform: scale(1.1);
-            z-index: 1;
-        }
-        
-        /* Contenido principal mejorado */
+        /* CONTENIDO PRINCIPAL CON MÁRGENES VISIBLES ARRIBA/ABAJO */
         #main-content {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(4px);
+            position: relative;
+        }
+        
+        /* Capa central con blur (deja espacio arriba/abajo) */
+        #main-content::before {
+            content: '';
+            position: absolute;
+            top: 50px; /* Margen superior para ver una fila */
+            left: 0;
+            width: 100%;
+            height: calc(100% - 100px); /* Restamos margen superior e inferior */
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(6px);
+            z-index: -1;
+            border-radius: 16px;
         }
         
         h1 {
-            font-family: 'Quicksand', sans-serif;
-            font-size: 4.5rem;
+            font-family: 'Geist Sans', sans-serif;
+            font-weight: 700;
+            font-size: 4rem;
             margin-bottom: 20px;
-            text-shadow: 3px 3px 8px rgba(0,0,0,0.7);
-            color: var(--text-light);
-            background: linear-gradient(to right, #ff8fab, #ff6b9e);
+            color: var(--text-dark);
+            background: linear-gradient(to right, #ff6b9e, #ff2d75);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-            font-weight: 700;
+            letter-spacing: -0.5px;
         }
         
         .subtitle {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-bottom: 40px;
             max-width: 600px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            font-weight: 400;
+            color: var(--text-dark);
+            opacity: 0.9;
         }
         
-        /* Botones modernos */
+        /* BOTONES MODERNOS */
         .btn {
             background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             border: none;
             color: var(--text-light);
-            padding: 16px 32px;
+            padding: 14px 28px;
             margin: 10px;
-            border-radius: 50px;
-            font-size: 1.2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 43, 117, 0.4);
+            box-shadow: 0 4px 12px rgba(255, 43, 117, 0.3);
             position: relative;
             overflow: hidden;
-            border: 2px solid rgba(255,255,255,0.2);
         }
         
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 43, 117, 0.6);
-            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 43, 117, 0.4);
         }
         
-        /* Secciones interactivas */
+        /* SECCIONES INTERACTIVAS */
         .interactive-section {
             display: none;
             position: fixed;
@@ -128,7 +142,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.85);
             z-index: 10;
             overflow-y: auto;
             padding: 40px 20px;
@@ -151,7 +165,12 @@
             backdrop-filter: blur(5px);
         }
         
-        /* Sección de video */
+        .close-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: rotate(90deg);
+        }
+        
+        /* SECCIÓN DE VIDEO */
         #video-section iframe {
             width: 80%;
             height: 60vh;
@@ -168,7 +187,7 @@
             margin-top: 30px;
         }
         
-        /* Sección de regalo */
+        /* SECCIÓN DE REGALO */
         #gift-section {
             display: flex;
             flex-direction: column;
@@ -180,22 +199,22 @@
             font-size: 2rem;
             margin-bottom: 40px;
             max-width: 700px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
             line-height: 1.5;
             background: rgba(255,255,255,0.1);
             padding: 30px;
             border-radius: 20px;
             backdrop-filter: blur(5px);
+            color: white;
         }
         
-        /* Burbujas de capibaras mejoradas */
+        /* BURBUJAS DE CAPIBARAS */
         .bubble {
             position: absolute;
             background-size: cover;
             background-position: center;
             border-radius: 50%;
             opacity: 0.9;
-            animation: float 8s infinite ease-in-out; /* Animación más larga */
+            animation: float 8s infinite ease-in-out;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             border: 2px solid rgba(255,255,255,0.3);
             cursor: pointer;
@@ -205,12 +224,12 @@
         @keyframes float {
             0% { transform: translateY(0) rotate(0deg) scale(1); }
             25% { transform: translateY(-150px) rotate(180deg) scale(1.05); }
-            50% { transform: translateY(-300px) rotate(360deg) scale(1.1); } /* Doble vuelta */
+            50% { transform: translateY(-300px) rotate(360deg) scale(1.1); }
             75% { transform: translateY(-150px) rotate(540deg) scale(1.05); }
-            100% { transform: translateY(0) rotate(720deg) scale(1); } /* Dos vueltas completas */
+            100% { transform: translateY(0) rotate(720deg) scale(1); }
         }
         
-        /* Sección de música */
+        /* SECCIÓN DE MÚSICA */
         #music-section {
             text-align: center;
         }
@@ -229,7 +248,47 @@
             margin-top: 30px;
         }
         
-        /* Sección +18 con disclaimer */
+        .music-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            width: 300px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s;
+        }
+        
+        .music-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .music-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .music-btn {
+            background: linear-gradient(135deg, #1DB954, #1ED760);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+        
+        .yt-music-btn {
+            background: linear-gradient(135deg, #FF0000, #FF3333);
+        }
+        
+        .music-btn:hover {
+            box-shadow: 0 5px 15px rgba(29, 185, 84, 0.4);
+        }
+        
+        /* SECCIÓN +18 */
         #danger-section {
             text-align: center;
         }
@@ -272,9 +331,31 @@
             box-shadow: 0 10px 25px rgba(255,105,180,0.5);
         }
         
-        /* Sección +21 */
+        /* SECCIÓN +21 */
         #super-danger-section {
             text-align: center;
+        }
+        
+        .super-danger-title {
+            font-size: 2.5rem;
+            color: #ff1493;
+            margin-bottom: 20px;
+        }
+        
+        .super-danger-message {
+            font-size: 1.5rem;
+            margin: 20px auto;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+        
+        #super-danger-section img {
+            max-width: 500px;
+            max-height: 70vh;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(255,0,100,0.6);
+            border: 3px solid rgba(255,255,255,0.2);
         }
     </style>
 </head>
@@ -286,8 +367,8 @@
     
     <!-- Contenido principal -->
     <div id="main-content">
-        <h1>Feliz Cumpleaños Mi Amor! ❤️</h1>
-        <p class="subtitle">Presiona el botón para comenzar esta experiencia especial que preparé para ti</p>
+        <h1>Feliz cumpleaños mi reina!</h1>
+        <p class="subtitle">Hace clic en el botón para comenzar este viaje cosmico jaja!</p>
         <button id="start-btn" class="btn">Comenzar</button>
     </div>
     
@@ -295,6 +376,7 @@
     <div id="video-section" class="interactive-section">
         <button class="close-btn">×</button>
         <iframe src="https://www.youtube.com/embed/Ffkl2rOQEMg?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p class="text-light" style="font-size: 1.5rem; margin-top: 20px;">Este tema es el favorito de tus favoritos asique, disfrute la musiquita!</p>
         <div class="video-buttons">
             <button id="gift-btn" class="btn">Abrir Regalo</button>
             <button id="music-btn" class="btn">Tu Música</button>
@@ -303,29 +385,41 @@
         </div>
     </div>
     
-    <!-- Sección de regalo (oculta inicialmente) -->
-    <div id="gift-section" class="interactive-section" style="display: none;">
+    <!-- Sección de regalo -->
+    <div id="gift-section" class="interactive-section">
         <button class="close-btn">×</button>
-        <p id="gift-message">Tu lugar en el mundo es San José, Entre Ríos, pero mi lugar favorito es donde estés tú. Te amo mucho ❤️</p>
+        <p id="gift-message">Muchos capibaras para vos ❤️<br>Jaja, se que es tu lugar en el mundo y te prometo que volveremos.<br>Mi lugar en el mundo es donde estes vos 😉.<br>Feliz cumple!</p>
         <button class="btn" onclick="createBubbles()">Más Capibaras!</button>
     </div>
     
     <!-- Sección de música -->
     <div id="music-section" class="interactive-section">
         <button class="close-btn">×</button>
-        <h2 class="music-title">Tus Playlists Especiales</h2>
+        <h2 class="music-title">Otro regalito..</h2>
+        <p class="text-light"  style="font-size: 1.3rem; margin-bottom: 20px;">Te arme una super playlist, escuchala donde quieras😉</p>
         <div class="music-links">
             <div class="music-card">
-                <iframe src="https://open.spotify.com/embed/playlist/2FaGmYpxpMXLZkD2Y2j8En" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                <h3>Spotify</h3>
+                <iframe src="https://open.spotify.com/embed/playlist/2FaGmYpxpMXLZkD2Y2j8En" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                <a href="https://open.spotify.com/playlist/2FaGmYpxpMXLZkD2Y2j8En" target="_blank">
+                    <button class="music-btn">Abrir en Spotify</button>
+                </a>
+            </div>
+            <div class="music-card">
+                <h3>YouTube Music</h3>
+                <p>Tu playlist favorita</p>
+                <a href="https://music.youtube.com/playlist?list=PLPS6kpvDENbLLqiUjHzflK6bRbLlOSl5w" target="_blank">
+                    <button class="music-btn yt-music-btn">Abrir en YouTube Music</button>
+                </a>
             </div>
         </div>
     </div>
     
-    <!-- Sección +18 con disclaimer -->
+    <!-- Sección +18 -->
     <div id="danger-section" class="interactive-section">
         <button class="close-btn">×</button>
-        <p class="danger-message">¡Dos regalos, pero en realidad son cuatro! 🎁🎁 ¡Sorpresa! Y sí, hablamos de los pechos 😂</p>
-        <p class="disclaimer">⚠️ Disclaimer: Haz clic bajo tu propio riesgo. El contenido puede ser demasiado hot para manejar ⚠️</p>
+        <p class="danger-message">¡Dos regalos, pero en realidad son cuatro! 🎁🎁 ¡Sip, hablamos de las gomas 😂!</p>
+        <p class="disclaimer">Disclaimer: Ojo cuando toques la imagen de cada una!... Hacelo bajo tu propio riesgo 😂</p>
         <div class="danger-images">
             <div class="danger-image-container" onclick="window.open('https://www.xvideos.com/video.hppaiai9509/mia_khalifa_y_su_madrastra_comparten_una_polla_blanca', '_blank')">
                 <img src="https://i.postimg.cc/gj0j43f1/danger-zone-1.jpg" alt="Regalo 1">
@@ -339,9 +433,9 @@
     <!-- Sección +21 -->
     <div id="super-danger-section" class="interactive-section">
         <button class="close-btn">×</button>
-        <h2 style="color: #ff1493; font-size: 2.5rem;">Para los ojos solo de mi princesa</h2>
-        <p style="font-size: 1.5rem; max-width: 700px; margin: 20px auto;">Sabes que siempre me gustó esta foto... y sé que a ti también te encanta. ¿Qué tal si recreamos esta pose pronto? 😉🔥</p>
-        <img src="https://i.postimg.cc/Xvwrvjf1/super-danger-zone.jpg" alt="Super Danger Zone" style="max-width: 500px; max-height: 70vh; border-radius: 15px; margin-top: 20px;">
+        <h2 class="super-danger-title">+21 Super Danger Zone</h2>
+        <p class="super-danger-message text-light">Y este es un regalo imaginario, se activa en tu mente luego de ver la foto 😉</p>
+        <img src="https://i.postimg.cc/Xvwrvjf1/super-danger-zone.jpg" alt="Super Danger Zone">
     </div>
 
     <script>
@@ -361,8 +455,8 @@
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
             
-            const tilesX = Math.ceil(screenWidth / 66);
-            const tilesY = Math.ceil(screenHeight / 66);
+            const tilesX = Math.ceil(screenWidth / 55); // 50px + 5px gap
+            const tilesY = Math.ceil(screenHeight / 55);
             const totalTiles = tilesX * tilesY;
             
             // Patrón semi-aleatorio evitando tomate y silla juntos
@@ -385,7 +479,6 @@
             }
         }
         
-        // Funciones para mostrar/ocultar secciones
         function showSection(sectionId) {
             document.querySelectorAll('.interactive-section').forEach(section => {
                 section.style.display = 'none';
@@ -393,27 +486,24 @@
             document.getElementById(sectionId).style.display = 'block';
         }
         
-        // Crear burbujas de capibaras con doble vuelta
         function createBubbles() {
             const section = document.getElementById('gift-section');
             const bubbleCount = 12;
             
-            // Limpiar burbujas existentes
             document.querySelectorAll('.bubble').forEach(bubble => bubble.remove());
             
             for (let i = 0; i < bubbleCount; i++) {
                 const bubble = document.createElement('div');
                 bubble.className = 'bubble';
                 bubble.style.backgroundImage = 'url(https://i.postimg.cc/cJMJSDWV/capibara.jpg)';
-                bubble.style.width = `${Math.random() * 100 + 80}px`; // 80-180px
+                bubble.style.width = `${Math.random() * 100 + 80}px`;
                 bubble.style.height = bubble.style.width;
                 bubble.style.left = `${Math.random() * 100}%`;
                 bubble.style.bottom = `-200px`;
-                bubble.style.animationDuration = `${Math.random() * 3 + 6}s`; // Más lento
+                bubble.style.animationDuration = `${Math.random() * 3 + 6}s`;
                 bubble.style.animationDelay = `${Math.random() * 2}s`;
                 section.appendChild(bubble);
                 
-                // Eliminar burbujas después de la animación
                 setTimeout(() => {
                     bubble.remove();
                 }, 10000);
@@ -451,6 +541,7 @@
         // Inicializar
         window.addEventListener('load', () => {
             generateMosaic();
+            document.getElementById('gift-section').style.display = 'none';
             
             // Precargar imágenes importantes
             const preloadImages = [
@@ -464,7 +555,6 @@
             });
         });
         
-        // Ajustar mosaico al redimensionar
         window.addEventListener('resize', () => {
             const mosaic = document.getElementById('mosaic');
             mosaic.innerHTML = '';
