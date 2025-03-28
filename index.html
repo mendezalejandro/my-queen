@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños Mi Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff6b9e;
+            --secondary-color: #ff8fab;
+            --accent-color: #ff2d75;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            color: var(--text-light);
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+        
+        /* Mosaico de fondo mejorado */
+        #mosaic-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        #mosaic {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 60px);
+            grid-auto-rows: 60px;
+            gap: 6px;
+            min-width: 100%;
+            min-height: 100%;
+            opacity: 0.5; /* Más visible */
+            filter: brightness(0.9) contrast(1.1) sepia(10%) saturate(1.2); /* Más definidas */
+        }
+        
+        .tile {
+            width: 60px;
+            height: 60px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .tile:hover {
+            transform: scale(1.1);
+            z-index: 1;
+        }
+        
+        /* Contenido principal mejorado */
+        #main-content {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+        }
+        
+        h1 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.7);
+            color: var(--text-light);
+            background: linear-gradient(to right, #ff8fab, #ff6b9e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+        
+        /* Botones modernos */
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border: none;
+            color: var(--text-light);
+            padding: 16px 32px;
+            margin: 10px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 43, 117, 0.4);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 43, 117, 0.6);
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+        }
+        
+        /* Secciones interactivas */
+        .interactive-section {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 10;
+            overflow-y: auto;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Sección de video */
+        #video-section iframe {
+            width: 80%;
+            height: 60vh;
+            margin-top: 5vh;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .video-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        /* Sección de regalo */
+        #gift-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #gift-message {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            line-height: 1.5;
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Burbujas de capibaras mejoradas */
+        .bubble {
+            position: absolute;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            opacity: 0.9;
+            animation: float 8s infinite ease-in-out; /* Animación más larga */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg) scale(1); }
+            25% { transform: translateY(-150px) rotate(180deg) scale(1.05); }
+            50% { transform: translateY(-300px) rotate(360deg) scale(1.1); } /* Doble vuelta */
+            75% { transform: translateY(-150px) rotate(540deg) scale(1.05); }
+            100% { transform: translateY(0) rotate(720deg) scale(1); } /* Dos vueltas completas */
+        }
+        
+        /* Sección de música */
+        #music-section {
+            text-align: center;
+        }
+        
+        .music-title {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+        
+        .music-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        /* Sección +18 con disclaimer */
+        #danger-section {
+            text-align: center;
+        }
+        
+        .danger-message {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .disclaimer {
+            font-size: 1rem;
+            margin-bottom: 30px;
+            color: #ffcc00;
+            font-style: italic;
+        }
+        
+        .danger-images {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .danger-image-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .danger-image-container:hover {
+            transform: scale(1.05);
+        }
+        
+        .danger-image-container img {
+            max-width: 350px;
+            max-height: 500px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(255,105,180,0.5);
+        }
+        
+        /* Sección +21 */
+        #super-danger-section {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mosaico de fondo -->
+    <div id="mosaic-container">
+        <div id="mosaic"></div>
+    </div>
+    
+    <!-- Contenido principal -->
+    <div id="main-content">
+        <h1>Feliz Cumpleaños Mi Amor! ❤️</h1>
+        <p class="subtitle">Presiona el botón para comenzar esta experiencia especial que preparé para ti</p>
+        <button id="start-btn" class="btn">Comenzar</button>
+    </div>
+    
+    <!-- Sección de video -->
+    <div id="video-section" class="interactive-section">
+        <button class="close-btn">×</button>
+        <iframe src="https://www.youtube.com/embed/Ffkl2rOQEMg?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="video-buttons">
+            <button id="gift-btn" class="btn">Abrir Regalo</button>
+            <button id="music-btn" class="btn">Tu Música</button>
+            <button id="danger-btn" class="btn">+18 Danger Zone</button>
+            <button id="super-danger-btn" class="btn">+21 Super Danger Zone</button>
+        </div>
+    </div>
+    
+    <!-- Sección de regalo (oculta inicialmente) -->
+    <div id="gift-section" class="interactive-section" style="display: none;">
+        <button class="close-btn">×</button>
+        <p id="gift-message">Tu lugar en el mundo es San José, Entre Ríos, pero mi lugar favorito es donde estés tú. Te amo mucho ❤️</p>
+        <button class="btn" onclick="createBubbles()">Más Capibaras!</button>
+    </div>
+    
+    <!-- Sección de música -->
+    <div id="music-section" class="interactive-section">
+        <button class="close-btn">×</button>
+        <h2 class="music-title">Tus Playlists Especiales</h2>
+        <div class="music-links">
+            <div class="music-card">
+                <iframe src="https://open.spotify.com/embed/playlist/2FaGmYpxpMXLZkD2Y2j8En" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sección +18 con disclaimer -->
+    <div id="danger-section" class="interactive-section">
+        <button class="close-btn">×</button>
+        <p class="danger-message">¡Dos regalos, pero en realidad son cuatro! 🎁🎁 ¡Sorpresa! Y sí, hablamos de los pechos 😂</p>
+        <p class="disclaimer">⚠️ Disclaimer: Haz clic bajo tu propio riesgo. El contenido puede ser demasiado hot para manejar ⚠️</p>
+        <div class="danger-images">
+            <div class="danger-image-container" onclick="window.open('https://www.xvideos.com/video.hppaiai9509/mia_khalifa_y_su_madrastra_comparten_una_polla_blanca', '_blank')">
+                <img src="https://i.postimg.cc/gj0j43f1/danger-zone-1.jpg" alt="Regalo 1">
+            </div>
+            <div class="danger-image-container" onclick="window.open('https://www.instagram.com/reel/DFQykfayMS0/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')">
+                <img src="https://i.postimg.cc/XqDJPpWq/danger-zone-2.jpg" alt="Regalo 2">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sección +21 -->
+    <div id="super-danger-section" class="interactive-section">
+        <button class="close-btn">×</button>
+        <h2 style="color: #ff1493; font-size: 2.5rem;">Para los ojos solo de mi princesa</h2>
+        <p style="font-size: 1.5rem; max-width: 700px; margin: 20px auto;">Sabes que siempre me gustó esta foto... y sé que a ti también te encanta. ¿Qué tal si recreamos esta pose pronto? 😉🔥</p>
+        <img src="https://i.postimg.cc/Xvwrvjf1/super-danger-zone.jpg" alt="Super Danger Zone" style="max-width: 500px; max-height: 70vh; border-radius: 15px; margin-top: 20px;">
+    </div>
+
+    <script>
+        // Generar mosaico de fondo
+        const images = [
+            "https://i.postimg.cc/R0fqCVMW/katara-removebg-preview.png",
+            "https://i.postimg.cc/fRVJFfpj/mimi-removebg-preview.png",
+            "https://i.postimg.cc/ncRX0PRh/sanguchito-de-miga-removebg-preview.png",
+            "https://i.postimg.cc/tRzZVTFP/silla-sex-removebg-preview.png",
+            "https://i.postimg.cc/rw7KLtL6/tomates-removebg-preview.png",
+            "https://i.postimg.cc/X77ZKbgP/traguito-removebg-preview.png",
+            "https://i.postimg.cc/4ywYCLXw/uvas-removebg-preview.png"
+        ];
+        
+        function generateMosaic() {
+            const mosaic = document.getElementById('mosaic');
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            
+            const tilesX = Math.ceil(screenWidth / 66);
+            const tilesY = Math.ceil(screenHeight / 66);
+            const totalTiles = tilesX * tilesY;
+            
+            // Patrón semi-aleatorio evitando tomate y silla juntos
+            let previousImage = '';
+            for (let i = 0; i < totalTiles; i++) {
+                const tile = document.createElement('div');
+                tile.className = 'tile';
+                
+                let randomImg;
+                do {
+                    randomImg = images[Math.floor(Math.random() * images.length)];
+                } while (
+                    (previousImage.includes('tomate') && randomImg.includes('silla')) ||
+                    (previousImage.includes('silla') && randomImg.includes('tomate'))
+                );
+                
+                tile.style.backgroundImage = `url(${randomImg})`;
+                mosaic.appendChild(tile);
+                previousImage = randomImg;
+            }
+        }
+        
+        // Funciones para mostrar/ocultar secciones
+        function showSection(sectionId) {
+            document.querySelectorAll('.interactive-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+        
+        // Crear burbujas de capibaras con doble vuelta
+        function createBubbles() {
+            const section = document.getElementById('gift-section');
+            const bubbleCount = 12;
+            
+            // Limpiar burbujas existentes
+            document.querySelectorAll('.bubble').forEach(bubble => bubble.remove());
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.style.backgroundImage = 'url(https://i.postimg.cc/cJMJSDWV/capibara.jpg)';
+                bubble.style.width = `${Math.random() * 100 + 80}px`; // 80-180px
+                bubble.style.height = bubble.style.width;
+                bubble.style.left = `${Math.random() * 100}%`;
+                bubble.style.bottom = `-200px`;
+                bubble.style.animationDuration = `${Math.random() * 3 + 6}s`; // Más lento
+                bubble.style.animationDelay = `${Math.random() * 2}s`;
+                section.appendChild(bubble);
+                
+                // Eliminar burbujas después de la animación
+                setTimeout(() => {
+                    bubble.remove();
+                }, 10000);
+            }
+        }
+        
+        // Event listeners
+        document.getElementById('start-btn').addEventListener('click', () => {
+            showSection('video-section');
+        });
+        
+        document.getElementById('gift-btn').addEventListener('click', () => {
+            showSection('gift-section');
+            createBubbles();
+        });
+        
+        document.getElementById('music-btn').addEventListener('click', () => {
+            showSection('music-section');
+        });
+        
+        document.getElementById('danger-btn').addEventListener('click', () => {
+            showSection('danger-section');
+        });
+        
+        document.getElementById('super-danger-btn').addEventListener('click', () => {
+            showSection('super-danger-section');
+        });
+        
+        document.querySelectorAll('.close-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.parentElement.style.display = 'none';
+            });
+        });
+        
+        // Inicializar
+        window.addEventListener('load', () => {
+            generateMosaic();
+            
+            // Precargar imágenes importantes
+            const preloadImages = [
+                'https://i.postimg.cc/cJMJSDWV/capibara.jpg',
+                'https://i.postimg.cc/gj0j43f1/danger-zone-1.jpg',
+                'https://i.postimg.cc/XqDJPpWq/danger-zone-2.jpg',
+                'https://i.postimg.cc/Xvwrvjf1/super-danger-zone.jpg'
+            ];
+            preloadImages.forEach(img => {
+                (new Image()).src = img;
+            });
+        });
+        
+        // Ajustar mosaico al redimensionar
+        window.addEventListener('resize', () => {
+            const mosaic = document.getElementById('mosaic');
+            mosaic.innerHTML = '';
+            generateMosaic();
+        });
+    </script>
+</body>
+</html>
